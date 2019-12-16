@@ -6,7 +6,7 @@ import store from './store'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-import HelloWorld from "@/components/HelloWorld.vue";
+import Index from "@/components/Index.vue";
 import About from "@/components/About.vue";
 
 Vue.use(BootstrapVue);
@@ -20,7 +20,7 @@ Vue.config.productionTip = false;
 const router = new VueRouter({
   mode: 'history',
   routes: [
-    { path: '/', component: HelloWorld },
+    { path: '/', component: Index },
     { path: '/about', component: About },
   ]
 });

@@ -20,7 +20,7 @@
       Layout
     }
   })
-  export default class HelloWorld extends Vue {
+  export default class Index extends Vue {
     @Prop() private msg!: string;
   }
 </script>
