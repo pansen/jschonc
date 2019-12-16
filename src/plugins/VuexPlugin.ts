@@ -15,7 +15,14 @@ console.debug('creating a new Vuex.Store ...');
 const store = new Vuex.Store({
   state: {
     [ztTypes.APP_DEBUG]: false,
-    [ztTypes.JSON_INPUT]: {"a": 1},
+    [ztTypes.JSON_INPUT]: {
+      "a": 1,
+      "b": 2,
+      "c": {
+        "ca": 12,
+        "cb": 22,
+      },
+    },
   },
   // https://vuex.vuejs.org/guide/getters.html
   getters: {},
