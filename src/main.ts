@@ -6,9 +6,11 @@ import store from './store'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import {VuexPlugin} from "@/plugins/VuexPlugin";
 import Index from "@/components/Index.vue";
 import About from "@/components/About.vue";
 
+Vue.use(VuexPlugin);
 Vue.use(BootstrapVue);
 
 // This installs <router-view> and <router-link>,
