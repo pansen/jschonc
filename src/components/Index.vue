@@ -1,12 +1,14 @@
 <template>
   <layout name="LayoutDefault">
     <div class="hello">
-      <h1>{{ msg }}</h1>
-      <p>
-        For a guide and recipes on how to configure / customize this project,<br>
-        check out the
-        <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-      </p>
+      <h1>Enter some JSON ...</h1>
+      <b-container class="bv-example-row">
+        <b-row>
+          <b-col><textarea v-model="$data.json_input"></textarea></b-col>
+          <b-col>2 of 3</b-col>
+          <b-col>3 of 3</b-col>
+        </b-row>
+      </b-container>
     </div>
   </layout>
 </template>
@@ -15,9 +17,16 @@
   import {Component, Prop, Vue} from 'vue-property-decorator';
   import Layout from '@/layouts/Layout.vue';
 
+  const _data = {
+    'json_input': '{}'
+  };
+
   @Component({
     components: {
       Layout
+    },
+    data() {
+      return _data;
     }
   })
   export default class Index extends Vue {

@@ -9,7 +9,7 @@
       <slot/>
     </main>
     <footer class="LayoutDefault__footer">
-      &copy; Awesome Company
+      &copy; pansen
     </footer>
   </div>
 </template>
