@@ -30,7 +30,6 @@
   import Vue from 'vue';
   import Layout from '@/layouts/Layout.vue';
   import ztTypes from '@/types/actions';
-  import {store} from '@/plugins/VuexPlugin';
   import ItemFilters from '@/components/ItemFilters.vue';
   import OutputRenderer from '@/components/OutputRenderer.vue';
 
@@ -57,7 +56,7 @@
           const _json = JSON.parse(newVal);
           Vue.set(_data, 'json_parsed', _json);
           _data.json_is_valid = true;
-          store.commit(ztTypes.JSON_INPUT, _json);
+          this.$store.commit(ztTypes.JSON_INPUT, _json);
         } catch (e) {
           console.log('invalid json: %o', e);
           _data.json_is_valid = false;
@@ -67,7 +66,7 @@
 
     mounted () {
       // We commit here to enable the "post-processing" in the mutation
-      store.commit(ztTypes.JSON_INPUT, {
+      this.$store.commit(ztTypes.JSON_INPUT, {
         'a': 1,
         'b': 2,
         'c': {
@@ -79,8 +78,8 @@
           },
         },
       });
-      Vue.set(_data, 'json_parsed', store.state[ztTypes.JSON_INPUT]);
-      Vue.set(_data, 'json_processed', store.state[ztTypes.JSON_PROCESSED]);
+      Vue.set(_data, 'json_parsed', this.$store.state[ztTypes.JSON_INPUT]);
+      Vue.set(_data, 'json_processed', this.$store.state[ztTypes.JSON_PROCESSED]);
       const _json = JSON.stringify(_data.json_parsed);
       console.log('mounted: %o', _json);
       _data.json_input = _json;
