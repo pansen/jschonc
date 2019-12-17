@@ -37,18 +37,19 @@ function buildNested (obj) {
 const store = new Vuex.Store({
   state: {
     [ztTypes.APP_DEBUG]: false,
-    [ztTypes.JSON_INPUT]: {},
+    [ztTypes.JSON_PARSED]: {},
   },
   // https://vuex.vuejs.org/guide/getters.html
-  getters: {},
+  getters: {
+  },
   mutations: {
     // reactive properties in Vuex: https://gist.github.com/DawidMyslak/2b046cca5959427e8fb5c1da45ef7748
     [ztTypes.APP_DEBUG] (state, v) {
       Vue.set(state, ztTypes.APP_DEBUG, v);
     },
-    [ztTypes.JSON_INPUT] (state, v) {
-      console.debug('Setting state for: %o: %o', ztTypes.JSON_INPUT, v);
-      Vue.set(state, ztTypes.JSON_INPUT, v);
+    [ztTypes.JSON_PARSED] (state, v) {
+      console.debug('Setting state for: %o: %o', ztTypes.JSON_PARSED, v);
+      Vue.set(state, ztTypes.JSON_PARSED, v);
 
       // TODO andi: avoid x-references - does this make sense here?
       this.commit(ztTypes.JSON_PROCESSED, JSON.parse(JSON.stringify(buildNested(v))));

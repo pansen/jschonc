@@ -3,7 +3,7 @@
  */
 const ztTypes = {
   APP_DEBUG: 'dbg',
-  JSON_INPUT: 'json_input',
+  JSON_PARSED: 'json_parsed',
   JSON_PROCESSED: 'json_processed',
 };
 

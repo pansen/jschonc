@@ -24,13 +24,6 @@
     components: {
       ItemFilter
     },
-    watch: {
-      object_ (newVal, oldVal) {
-        if (oldVal) {
-          console.debug('[ItemFilters] new value for object_: %o (%o)', newVal, oldVal);
-        }
-      },
-    }
   }
 </script>
 

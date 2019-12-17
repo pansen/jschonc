@@ -12,12 +12,12 @@
           </b-col>
           <b-col>
             <ItemFilters
-              v-bind:object_="$data.json_processed"
+              v-bind:object_="json_processed"
             ></ItemFilters>
           </b-col>
           <b-col>
             <OutputRenderer
-              v-bind:object_="$data.json_processed"
+              v-bind:object_="json_processed"
             ></OutputRenderer>
           </b-col>
         </b-row>
@@ -27,7 +27,6 @@
 </template>
 
 <script>
-  import Vue from 'vue';
   import Layout from '@/layouts/Layout.vue';
   import ztTypes from '@/types/actions';
   import ItemFilters from '@/components/ItemFilters.vue';
@@ -35,8 +34,6 @@
 
   const _data = {
     'json_input': '',
-    'json_parsed': {},
-    'json_processed': {},
     'json_is_valid': true
   };
 
@@ -53,10 +50,9 @@
       json_input (newVal, oldVal) {
         console.debug('JSON input: %o', newVal);
         try {
-          const _json = JSON.parse(newVal);
-          Vue.set(_data, 'json_parsed', _json);
+          const _json_parsed = JSON.parse(newVal);
           _data.json_is_valid = true;
-          this.$store.commit(ztTypes.JSON_INPUT, _json);
+          this.$store.commit(ztTypes.JSON_PARSED, _json_parsed);
         } catch (e) {
           console.log('invalid json: %o', e);
           _data.json_is_valid = false;
@@ -64,9 +60,18 @@
       }
     },
 
+    computed: {
+      json_parsed() {
+        return this.$store.state[ztTypes.JSON_PARSED];
+      },
+      json_processed() {
+        return this.$store.state[ztTypes.JSON_PROCESSED];
+      },
+    },
+
     mounted () {
       // We commit here to enable the "post-processing" in the mutation
-      this.$store.commit(ztTypes.JSON_INPUT, {
+      const _json_parsed = {
         'a': 1,
         'b': 2,
         'c': {
@@ -77,10 +82,10 @@
             'ccb': 22,
           },
         },
-      });
-      Vue.set(_data, 'json_parsed', this.$store.state[ztTypes.JSON_INPUT]);
-      Vue.set(_data, 'json_processed', this.$store.state[ztTypes.JSON_PROCESSED]);
-      const _json = JSON.stringify(_data.json_parsed);
+      };
+      this.$store.commit(ztTypes.JSON_PARSED, _json_parsed);
+
+      const _json = JSON.stringify(_json_parsed);
       console.log('mounted: %o', _json);
       _data.json_input = _json;
     }

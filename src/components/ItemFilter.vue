@@ -15,8 +15,6 @@
 </template>
 
 <script>
-  import Vue from 'vue';
-
   const _data = {
     'key': '',
     'value': {},
@@ -35,25 +33,6 @@
     data () {
       return _data
     },
-    watch: {
-      key_ (newVal, oldVal) {
-        if (oldVal) {
-          console.debug('[ItemFilter] new value for key_: %o (%o)', newVal, oldVal);
-        }
-        Vue.set(_data, 'key', newVal);
-      },
-      value_ (newVal, oldVal) {
-        if (oldVal) {
-          console.debug('[ItemFilter] new value for value_: %o (%o)', newVal, oldVal);
-        }
-        Vue.set(_data, 'value', newVal);
-      },
-    },
-    // mounted(){
-    //   Vue.set(_data, 'key', this.$props.key_);
-    //   Vue.set(_data, 'value', this.$props.value_);
-    // }
-
   }
 </script>
 
