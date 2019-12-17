@@ -11,22 +11,35 @@ if (process.env.NODE_ENV !== 'production') {
 
 Vue.use(Vuex);
 
-console.debug('creating a new Vuex.Store ...');
+function buildNested(obj: object) {
+  const _nested = {};
+  for (const k in obj) {
+    const v: any = obj[k];
+
+    if (typeof v === 'object' && typeof v['_children_'] === 'undefined') {
+      _nested[k] = {
+        '_children_': buildNested(v),
+        '_config_': {
+          'nullable': false
+        },
+      }
+    } else {
+      _nested[k] = {
+        'value': v,
+        '_config_': {
+          'nullable': false
+        },
+      };
+    }
+  }
+  return _nested;
+}
+
+
 const store = new Vuex.Store({
   state: {
     [ztTypes.APP_DEBUG]: false,
-    [ztTypes.JSON_INPUT]: {
-      "a": 1,
-      "b": 2,
-      "c": {
-        "ca": 12,
-        "cb": 22,
-        "cc": {
-          "cca": 12,
-          "ccb": 22,
-        },
-      },
-    },
+    [ztTypes.JSON_INPUT]: {},
   },
   // https://vuex.vuejs.org/guide/getters.html
   getters: {},
@@ -36,7 +49,13 @@ const store = new Vuex.Store({
       Vue.set(state, ztTypes.APP_DEBUG, v);
     },
     [ztTypes.JSON_INPUT](state, v) {
+      console.debug('Setting state for: %o', ztTypes.JSON_INPUT);
       Vue.set(state, ztTypes.JSON_INPUT, v);
+      console.debug('Setting state for: %o', ztTypes.JSON_PROCESSED);
+      Vue.set(state, ztTypes.JSON_PROCESSED, buildNested(v));
+    },
+    [ztTypes.JSON_PROCESSED](state, v) {
+      Vue.set(state, ztTypes.JSON_PROCESSED, v);
     },
   }
 });

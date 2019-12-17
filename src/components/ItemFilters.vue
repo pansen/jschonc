@@ -2,7 +2,7 @@
   <div class="zt-item-filters">
     <ul class="zt-item-filter">
       <ItemFilter
-        v-for="(v, k, index ) in nestedObject"
+        v-for="(v, k, index ) in $data.json_processed"
         :key="k"
         v-bind:index="index"
         v-bind:key_="k"
@@ -15,31 +15,22 @@
 <script lang="ts">
   import {Component, Prop, Vue} from 'vue-property-decorator';
   import ItemFilter from "@/components/ItemFilter.vue";
+  import {store} from "@/plugins/VuexPlugin";
+  import ztTypes from "@/types/actions";
 
-  function buildNested(obj) {
-    const _nested = {};
-    for (const k in obj) {
-      const v = obj[k];
-
-      if (typeof v === 'object') {
-        _nested[k] = {
-          '_children_': buildNested(v)
-        }
-      } else {
-        _nested[k] = v;
-      }
-    }
-    return _nested;
-  }
+  const _data = {
+    json_processed: {}
+  };
 
   @Component({
     components: {
       ItemFilter
     },
-    computed: {
-      nestedObject: function () {
-        return buildNested(this.$props.object_);
-      }
+    data() {
+      return _data;
+    },
+    mounted() {
+      _data.json_processed = store.state[ztTypes.JSON_PROCESSED];
     }
   })
   export default class ItemFilters extends Vue {

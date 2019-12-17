@@ -63,7 +63,19 @@
     @Prop() private msg!: string;
 
     mounted(): void {
-      console.debug('Got store with state: %o', store.state);
+      // We commit here to enable the "post-processing" in the mutation
+      store.commit(ztTypes.JSON_INPUT, {
+        "a": 1,
+        "b": 2,
+        "c": {
+          "ca": 142,
+          "cb": 22,
+          "cc": {
+            "cca": 12,
+            "ccb": 22,
+          },
+        },
+      });
       _data.json_parsed = store.state[ztTypes.JSON_INPUT];
       const _json = JSON.stringify(_data.json_parsed);
       console.log('mounted: %o', _json);
