@@ -21,6 +21,10 @@ const store = new Vuex.Store({
       "c": {
         "ca": 12,
         "cb": 22,
+        "cc": {
+          "cca": 12,
+          "ccb": 22,
+        },
       },
     },
   },

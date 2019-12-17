@@ -6,18 +6,14 @@
         <b-row>
           <b-col>
             <div :class="{ 'valid': json_is_valid, 'invalid': !json_is_valid }">
-            <textarea
+            <textarea class="json_input"
             v-model="$data.json_input"></textarea>
             </div>
           </b-col>
           <b-col>
-            <zt-item-filter
-              v-for="(v, k, index ) in $data.json_parsed"
-              :key="k"
-              v-bind:index="index"
-              v-bind:key_="k"
-              v-bind:value_="v"
-            ></zt-item-filter>
+            <ItemFilters
+              v-bind:object_="$data.json_parsed"
+            ></ItemFilters>
           </b-col>
           <b-col>3 of 3</b-col>
         </b-row>
@@ -31,7 +27,7 @@
   import Layout from '@/layouts/Layout.vue';
   import ztTypes from "@/types/actions";
   import {store} from "@/plugins/VuexPlugin";
-  import ItemFilter from "@/components/ItemFilter.vue";
+  import ItemFilters from "@/components/ItemFilters.vue";
 
   const _data = {
     'json_input': '',
@@ -42,7 +38,7 @@
   @Component({
     components: {
       Layout,
-      'zt-item-filter': ItemFilter
+      ItemFilters
     },
     data() {
       return _data;
@@ -94,6 +90,11 @@
 
   a {
     color: #42b983;
+  }
+
+  textarea.json_input {
+    min-height: 300px;
+    width: 95%;
   }
 
   div.valid {
