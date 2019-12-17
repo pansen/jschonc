@@ -15,7 +15,11 @@
               v-bind:object_="$data.json_parsed"
             ></ItemFilters>
           </b-col>
-          <b-col>3 of 3</b-col>
+          <b-col>
+            <OutputRenderer
+              v-bind:object_="$data.json_processed"
+            ></OutputRenderer>
+          </b-col>
         </b-row>
       </b-container>
     </div>
@@ -28,17 +32,20 @@
   import ztTypes from "@/types/actions";
   import {store} from "@/plugins/VuexPlugin";
   import ItemFilters from "@/components/ItemFilters.vue";
+  import OutputRenderer from "@/components/OutputRenderer.vue";
 
   const _data = {
     'json_input': '',
     'json_parsed': {},
+    'json_processed': {},
     'json_is_valid': true
   };
 
   @Component({
     components: {
       Layout,
-      ItemFilters
+      ItemFilters,
+      OutputRenderer
     },
     data() {
       return _data;
@@ -77,6 +84,7 @@
         },
       });
       _data.json_parsed = store.state[ztTypes.JSON_INPUT];
+      _data.json_processed = store.state[ztTypes.JSON_PROCESSED];
       const _json = JSON.stringify(_data.json_parsed);
       console.log('mounted: %o', _json);
       _data.json_input = _json;
