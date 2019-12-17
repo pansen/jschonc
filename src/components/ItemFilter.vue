@@ -1,5 +1,7 @@
 <template>
   <li class="zt-item-filter">
+    <label :for="value_['_id_']">nullable </label>
+    <input type="checkbox" :id="value_['_id_']" v-model="value_._config_.nullable">
     {{ key_ }}:
     <span v-if="typeof value_['_children_'] === 'undefined'">{{ value_.value }}</span>
     <ul v-if="typeof value_['_children_'] !== 'undefined'" class="zt-item-filter nested">
