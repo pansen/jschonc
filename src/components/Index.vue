@@ -53,6 +53,9 @@
           const _json_parsed = JSON.parse(newVal);
           _data.json_is_valid = true;
           this.$store.commit(ztTypes.JSON_PARSED, _json_parsed);
+          // TODO andi: how to beautify the input once we know its valid.
+          // newVal = JSON.stringify(newVal, null, 2);
+          return newVal;
         } catch (e) {
           console.log('invalid json: %o', e);
           _data.json_is_valid = false;
@@ -61,10 +64,10 @@
     },
 
     computed: {
-      json_parsed() {
+      json_parsed () {
         return this.$store.state[ztTypes.JSON_PARSED];
       },
-      json_processed() {
+      json_processed () {
         return this.$store.state[ztTypes.JSON_PROCESSED];
       },
     },
