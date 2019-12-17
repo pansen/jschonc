@@ -25,14 +25,9 @@
       ItemFilter
     },
     watch: {
-      key_ (newVal, oldVal) {
+      object_ (newVal, oldVal) {
         if (oldVal) {
-          console.debug('[ItemFilters] new value for key_: %o (%o)', newVal, oldVal);
-        }
-      },
-      value_ (newVal, oldVal) {
-        if (oldVal) {
-          console.debug('[ItemFilters] new value for value_: %o (%o)', newVal, oldVal);
+          console.debug('[ItemFilters] new value for object_: %o (%o)', newVal, oldVal);
         }
       },
     }
