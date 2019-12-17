@@ -7,10 +7,6 @@
 <script lang="ts">
   import {Component, Prop, Vue} from 'vue-property-decorator';
 
-  const _data = {
-    json_processed: {}
-  };
-
   @Component({})
   export default class OutputRenderer extends Vue {
     @Prop() private object_!: object;

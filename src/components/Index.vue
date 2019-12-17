@@ -55,7 +55,7 @@
         console.debug('JSON input: %o', newVal);
         try {
           const _json = JSON.parse(newVal);
-          _data.json_parsed = _json;
+          Vue.set(_data, 'json_parsed', _json);
           _data.json_is_valid = true;
           store.commit(ztTypes.JSON_INPUT, _json);
         } catch (e) {
@@ -83,8 +83,8 @@
           },
         },
       });
-      _data.json_parsed = store.state[ztTypes.JSON_INPUT];
-      _data.json_processed = store.state[ztTypes.JSON_PROCESSED];
+      Vue.set(_data, 'json_parsed', store.state[ztTypes.JSON_INPUT]);
+      Vue.set(_data, 'json_processed', store.state[ztTypes.JSON_PROCESSED]);
       const _json = JSON.stringify(_data.json_parsed);
       console.log('mounted: %o', _json);
       _data.json_input = _json;
