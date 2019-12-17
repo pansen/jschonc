@@ -51,8 +51,7 @@ const store = new Vuex.Store({
     [ztTypes.JSON_INPUT](state, v) {
       console.debug('Setting state for: %o', ztTypes.JSON_INPUT);
       Vue.set(state, ztTypes.JSON_INPUT, v);
-      console.debug('Setting state for: %o', ztTypes.JSON_PROCESSED);
-      Vue.set(state, ztTypes.JSON_PROCESSED, buildNested(v));
+      this.commit(ztTypes.JSON_PROCESSED, buildNested(v));
     },
     [ztTypes.JSON_PROCESSED](state, v) {
       Vue.set(state, ztTypes.JSON_PROCESSED, v);
