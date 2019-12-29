@@ -25,7 +25,10 @@ class TypeNode extends AbstractNode {
   }
 
   get children () {
-    return this._children;
+    if (this._children && typeof this._children !== 'undefined') {
+      return this._children;
+    }
+    return {};
   }
 
   get hasChildren () {
