@@ -1,12 +1,12 @@
 <template>
   <li class="zt-item-filter">
-    <label :for="value_['_id_']">nullable </label>
-    <input type="checkbox" :id="value_['_id_']" v-model="value_._config_.nullable">
+    <label :for="value_.id">nullable </label>
+    <input type="checkbox" :id="value_.id" v-model="value_.config.nullable">
     {{ key_ }}:
-    <span v-if="typeof value_['_children_'] === 'undefined'">{{ value_.value }}</span>
-    <ul v-if="typeof value_['_children_'] !== 'undefined'" class="zt-item-filter nested">
+    <span v-if="!value_.hasChildren">{{ value_.value }}</span>
+    <ul v-if="value_.hasChildren" class="zt-item-filter nested">
       <ItemFilter
-        v-for="(v, k, index ) in value_._children_"
+        v-for="(v, k, index ) in value_.children"
         :key="k"
         v-bind:index="index"
         v-bind:key_="k"

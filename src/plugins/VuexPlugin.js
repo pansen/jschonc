@@ -28,8 +28,7 @@ const store = new Vuex.Store({
       // console.debug('Setting state for: %o: %o', ztTypes.JSON_PARSED, v);
       Vue.set(state, ztTypes.JSON_PARSED, v);
 
-      // TODO andi: avoid x-references - does this make sense here?
-      this.commit(ztTypes.JSON_PROCESSED, JSON.parse(JSON.stringify(buildJsonProcessed(v))));
+      this.commit(ztTypes.JSON_PROCESSED, buildJsonProcessed(v));
     },
     [ztTypes.JSON_PROCESSED] (state, v) {
       // console.debug('Setting state for: %o: %o', ztTypes.JSON_PROCESSED, v);

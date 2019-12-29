@@ -4,7 +4,7 @@ export function renderSchemaClass (className, jsonProcessed, indent) {
   def += `${' '.repeat(indent * _intent)}class ${className}(Schema):\n`;
   for (const k in jsonProcessed) {
     const v = jsonProcessed[k];
-    const required = v._config_.nullable ? 'False' : 'True';
+    const required = v._config.nullable ? 'False' : 'True';
     let fieldType;
 
     if (typeof v.value === 'number') {
