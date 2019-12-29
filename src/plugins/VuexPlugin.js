@@ -1,6 +1,7 @@
 import Vuex from 'vuex';
 import Vue from 'vue';
 import ztTypes from '@/types/actions';
+import {buildJsonProcessed} from '../lib/structure';
 
 Vue.config.productionTip = false;
 if (process.env.NODE_ENV !== 'production') {
@@ -8,32 +9,6 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 Vue.use(Vuex);
-
-function buildNested (obj) {
-  const _nested = {};
-  for (const k in obj) {
-    const v = obj[k];
-
-    if (typeof v === 'object' && typeof v['_children_'] === 'undefined') {
-      _nested[k] = {
-        '_children_': buildNested(v),
-        '_id_': Math.floor(Math.random() * 9999999) + 1,
-        '_config_': {
-          'nullable': false
-        },
-      }
-    } else {
-      _nested[k] = {
-        'value': v,
-        '_id_': Math.floor(Math.random() * 9999999) + 1,
-        '_config_': {
-          'nullable': false
-        },
-      };
-    }
-  }
-  return _nested;
-}
 
 
 const store = new Vuex.Store({
@@ -54,7 +29,7 @@ const store = new Vuex.Store({
       Vue.set(state, ztTypes.JSON_PARSED, v);
 
       // TODO andi: avoid x-references - does this make sense here?
-      this.commit(ztTypes.JSON_PROCESSED, JSON.parse(JSON.stringify(buildNested(v))));
+      this.commit(ztTypes.JSON_PROCESSED, JSON.parse(JSON.stringify(buildJsonProcessed(v))));
     },
     [ztTypes.JSON_PROCESSED] (state, v) {
       // console.debug('Setting state for: %o: %o', ztTypes.JSON_PROCESSED, v);
