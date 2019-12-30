@@ -8,6 +8,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import Index from '@/components/Index.vue';
 import About from '@/components/About.vue';
 import {VuexPlugin, store} from './plugins/VuexPlugin';
+import ModalComp from './components/ModalComp';
 
 Vue.use(VuexPlugin);
 Vue.use(BootstrapVue);
@@ -22,6 +23,7 @@ const router = new VueRouter({
   mode: 'history',
   routes: [
     {path: '/', component: Index},
+    {path: '/modal', component: ModalComp},
     {path: '/about', component: About},
   ]
 });
