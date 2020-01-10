@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import {renderSchemaClass} from '../lib/render/marshmallow';
+  import {renderDataClass, renderSchemaClass} from '../lib/render/marshmallow';
 
   export default {
     props: {
@@ -16,7 +16,9 @@
 
     computed: {
       rendered () {
-        return renderSchemaClass('MyFirstSony', this.$props.object_, 0);
+        return renderSchemaClass('MyFirstSonySchema', this.$props.object_, 0)
+          + '\n'
+          + renderDataClass('MyFirstSony', this.$props.object_, 0);
       },
     }
   }
