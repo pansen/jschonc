@@ -49,7 +49,11 @@ export function buildJsonProcessed (obj) {
     const v = obj[k];
 
     if (typeof v === 'object') {
-      _nested[k] = new TypeNode(v, new ConfigNode(false), buildJsonProcessed(v));
+      if (Array.isArray(v)) {
+        console.log("k: %o", k);
+      } else {
+        _nested[k] = new TypeNode(v, new ConfigNode(false), buildJsonProcessed(v));
+      }
     } else {
       _nested[k] = new TypeNode(v, new ConfigNode(false));
     }

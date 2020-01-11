@@ -1,7 +1,7 @@
 import Vuex from 'vuex';
 import Vue from 'vue';
 import ztTypes from '@/types/actions';
-import {buildJsonProcessed} from '../lib/structure';
+import {buildJsonProcessed} from '../lib/json_structure';
 
 Vue.config.productionTip = false;
 if (process.env.NODE_ENV !== 'production') {
