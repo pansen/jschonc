@@ -32,15 +32,10 @@ dev.run: install
 .PHONY: test.unit
 test.unit:
 	source "$(NVM_DIR)/nvm.sh"; \
-		nvm exec --lts node_modules/.bin/yarn unit
-
-.PHONY: test.e2e
-test.e2e:
-	source "$(NVM_DIR)/nvm.sh"; \
-		nvm exec --lts node_modules/.bin/yarn e2e
+		nvm exec --lts node_modules/.bin/yarn test:unit
 
 .PHONY: test
-test: install test.unit test.e2e
+test: install test.unit
 
 
 dist:
