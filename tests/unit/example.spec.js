@@ -1,12 +1,14 @@
-import { shallowMount } from '@vue/test-utils'
-import HelloWorld from '@/components/HelloWorld.vue'
+import {buildJsonProcessed} from '../../src/lib/json_structure';
 
-describe('HelloWorld.vue', () => {
-  it('renders props.msg when passed', () => {
-    const msg = 'new message'
-    const wrapper = shallowMount(HelloWorld, {
-      propsData: { msg }
-    })
-    expect(wrapper.text()).toMatch(msg)
+const JSON_INPUT = JSON.parse('{"a": 1, "b": {"c": 1, "d": 3}}');
+
+describe('json_structure', () => {
+  it('buildJsonProcessed', () => {
+    const tree = buildJsonProcessed(JSON_INPUT);
+    expect(Object.keys(tree).length).toBe(2);
+    expect(Object.keys(tree)).toStrictEqual(['a', 'b']);
+
+    expect(Object.keys(tree.b.children).length).toBe(2);
+    expect(Object.keys(tree.b.children)).toStrictEqual(['c', 'd']);
   })
-})
+});
